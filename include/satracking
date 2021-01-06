@@ -1,0 +1,7 @@
+#include "../src/satracking/SaCost.h"
+#include "../src/satracking/SaCostEuclidean.h"
+#include "../src/satracking/SaDetection.h"
+#include "../src/satracking/SaDetectionReader.h"
+#include "../src/satracking/SaTrack.h"
+#include "../src/satracking/SaTracker.h"
+#include "../src/satracking/SaTrackerLessCost.h"

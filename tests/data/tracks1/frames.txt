@@ -1,0 +1,5 @@
+/Users/sprigent/Documents/code/slib/stracking/tests/data/tracks1/track1_t001.tif
+/Users/sprigent/Documents/code/slib/stracking/tests/data/tracks1/track1_t002.tif
+/Users/sprigent/Documents/code/slib/stracking/tests/data/tracks1/track1_t003.tif
+/Users/sprigent/Documents/code/slib/stracking/tests/data/tracks1/track1_t004.tif
+/Users/sprigent/Documents/code/slib/stracking/tests/data/tracks1/track1_t005.tif

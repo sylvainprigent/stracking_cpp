@@ -1,0 +1,31 @@
+############################################################
+#
+#
+# Copyright (c) stracking 2020
+#
+# AUTHOR:
+# Sylvain Prigent 
+# 
+######################################################################
+## 
+### Commentary: 
+## 
+######################################################################
+## 
+### Change log:
+## 
+######################################################################
+
+if(NOT stracking_USE_FILE_INCLUDED)
+
+   set(stracking_USE_FILE_INCLUDED 1)
+
+   include_directories(${stracking_INCLUDE_DIRS})
+
+   link_directories(${stracking_LIBRARY_DIRS})
+
+   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${stracking_CMAKE_DIR})
+
+   include(strackingDependencies)
+   
+endif(NOT stracking_USE_FILE_INCLUDED)

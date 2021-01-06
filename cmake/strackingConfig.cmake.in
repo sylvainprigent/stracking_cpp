@@ -1,0 +1,23 @@
+############################################################
+#
+#
+# Copyright (c) stracking 2021
+#
+# AUTHOR:
+# Sylvain Prigent
+# 
+######################################################################
+## 
+### Commentary: 
+## 
+######################################################################
+## 
+### Change log:
+## 
+######################################################################
+
+set(stracking_INCLUDE_DIRS "@stracking_INCLUDE_DIR@")
+set(stracking_LIBRARY_DIRS "@stracking_LIBRARY_DIR@")
+set(stracking_CMAKE_DIR   "@stracking_CMAKE_DIR@")
+
+set(stracking_USE_FILE "@stracking_USE_FILE@")
