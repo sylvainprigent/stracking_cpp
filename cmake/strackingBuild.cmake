@@ -2,7 +2,7 @@
 #
 # $Id$
 #
-# Copyright (c) Spartion 2020
+# Copyright (c) Stracking 2020
 #
 # AUTHOR:
 # Sylvain Prigent

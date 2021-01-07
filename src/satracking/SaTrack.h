@@ -38,6 +38,9 @@ public:
     /// \fn SaDetection* last();
     /// \return the last detection of the track
     SaDetection* last();
+        /// \fn SaDetection* first();
+    /// \return the first detection of the track
+    SaDetection* first();
 
 protected:
     std::vector<SaDetection*> m_detections;

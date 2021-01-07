@@ -29,3 +29,8 @@ SaDetection* SaTrack::last()
 {
     return m_detections[m_detections.size()-1];
 }
+
+SaDetection* SaTrack::first()
+{
+    return m_detections[0];
+}
