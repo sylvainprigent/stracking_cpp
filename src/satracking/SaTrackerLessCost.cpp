@@ -4,6 +4,8 @@
 /// \version 0.1
 /// \date 2021
 
+#include <iostream>
+
 #include "SaTrackerLessCost.h"
 
 SaTrackerLessCost::SaTrackerLessCost() : SaTracker()
@@ -26,13 +28,16 @@ void SaTrackerLessCost::run()
 {
     m_tracks.clear();
 
+    std::cout << "tracker detection frame count = " << m_detections.size() << std::endl;
+
     // set all the detections as dummies
-    std::vector<SaDetection*> dummies = m_detections[1];
+    std::vector<SaDetection*> dummies = m_detections[0];
 
     std::vector<SaDetection*> targets;
     for (int t = 1 ; t < m_detections.size() ; t++)
     {
         targets = m_detections[t];
+        
         // connect trajectories to targets
         for (int l = 0 ; l < m_tracks.size() ; l++){
             SaDetection* last_detection = m_tracks[l]->last();
@@ -72,11 +77,13 @@ void SaTrackerLessCost::run()
             }
             if (min_pos > -1){
                 SaTrack* new_track = new SaTrack;
+                new_track->append(dummies[l]);
                 new_track->append(targets[min_pos]);
                 m_tracks.push_back(new_track);
                 targets.erase(targets.begin()+min_pos); // remove the target
             }
         }
+        dummies = targets;
     }
 
 }

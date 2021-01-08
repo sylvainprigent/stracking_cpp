@@ -25,4 +25,4 @@ SET(SRC_FILES
 SET(NAME AssociationTracker)
 SET(FILE ${SRC_FILES} main.cpp SaFactories.h SaFactories.cpp)
 add_executable(${NAME} ${FILE})
-target_link_libraries(${NAME} ${SL_LIBRARIES} satracking sdata sdataio scli)
+target_link_libraries(${NAME} ${SL_LIBRARIES} satracking simage simageio sshape sdata sdataio scli)

@@ -7,7 +7,10 @@
 #include "math.h"
 #include <fstream>
 
+#include <score>
+#include <sshape>
 #include <simage>
+#include <simageio>
 
 #include "SaTracker.h"
 
@@ -79,9 +82,9 @@ void SaTracker::saveTracksMoviePlot(std::string rootFileName)
 
     int print_offset = 10;
     // get a random color for each track
-    vector<vector<int> > randColors;
+    std::vector<SColor*> randColors;
     for (unsigned int l = 0 ; l < m_tracks.size() ; ++l){
-        vector<int> randColor = SColor::getRandRGB();
+        SColor* randColor = SColor::getRandRGB();
         randColors.push_back(randColor);
     }
 
@@ -89,20 +92,26 @@ void SaTracker::saveTracksMoviePlot(std::string rootFileName)
     for (int t = 0 ; t < m_framesFiles.size() ; t++)
     {
         // load the frame as RGB image
-        SImageFloat* frame = dynamic_cast<SImageFloat*>(SImageReader::read(inputImageFile, 32));
-        SImageFloat* rgbFrame = SImageColor::toRGB(frame);
+        SImageFloat* frame = dynamic_cast<SImageFloat*>(SImageReader::read(m_framesFiles[t], 32));
+        SImageUInt* rgbFrame = SImageColor::toRGB(frame);
         delete frame;
 
         // draw the track on this frame
         for (unsigned int m = 0 ; m < m_tracks.size() ; m++)
         {
             SaTrack* track = m_tracks[m];
+            // get the frame color
+            SColor* randColor = randColors[m];
+
+            // plot a point in the first frame of the track
+            if (track->first()->t() == t){
+                SLine line(track->first()->x(), track->first()->y(), track->first()->x(), track->first()->y());
+                line.setColor(randColor);
+                line.draw(rgbFrame);
+            }
             // Plot the track if it appears in the frame t
             if (track->first()->t() <= t && track->last()->t() >= t)
             {
-                // get a color
-                vector<int> randColor = randColors[m];
-
                 // draw the connections
                 for(unsigned int i = 0 ; i < track->size()-1 ; i++)
                 {
@@ -110,7 +119,9 @@ void SaTracker::saveTracksMoviePlot(std::string rootFileName)
                     SaDetection* d2 = track->get(i+1);
                     if (d2->t() <= t && d2->t() >= t-print_offset)
                     {
-                        SDraw::draw2DLineInRGB(rgbFrame, d1->x(), d1->y(), d2->x(), d2->y(), randColor);
+                        SLine line(d1->x(), d1->y(), d2->x(), d2->y());
+                        line.setColor(randColor);
+                        line.draw(rgbFrame);
                     }
                 }
             }

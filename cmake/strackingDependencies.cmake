@@ -48,26 +48,40 @@ if ( simage_FOUND )
   message(STATUS "simage_LIBRARY_DIRS=" ${simage_LIBRARY_DIRS}) 
   set(stracking_HAVE_simage 1)
 else( simage_FOUND )
-  message(STATUS "NOT Using ")
+  message(STATUS "NOT Using simage")
 endif( simage_FOUND )
 
+## #################################################################
+## sshape
+## #################################################################
+find_package (sshape REQUIRED)
+if ( sshape_FOUND )
+  message(STATUS "Using sshape")
+  set (SL_INCLUDE_DIRS ${SL_INCLUDE_DIRS} ${sshape_INCLUDE_DIRS})
+  set (SL_LIBRARY_DIRS ${SL_LIBRARY_DIRS} ${sshape_LIBRARY_DIRS})
+  set (SL_LIBRARIES ${SL_LIBRARIES} ${sshape_LIBRARIES})
+  message(STATUS "sshape_LIBRARY_DIRS=" ${sshape_LIBRARY_DIRS}) 
+  set(stracking_HAVE_sshape 1)
+else( sshape_FOUND )
+  message(STATUS "NOT Using sshape")
+endif( sshape_FOUND )
+
+find_package (simageio REQUIRED)
+if ( simageio_FOUND )
+  message(STATUS "Using SImageIO")
+  set (SL_INCLUDE_DIRS ${SL_INCLUDE_DIRS} ${simageio_INCLUDE_DIRS})
+  set (SL_LIBRARY_DIRS ${SL_LIBRARY_DIRS} ${simageio_LIBRARY_DIRS})
+  set (SL_LIBRARIES ${SL_LIBRARIES} ${simageio_LIBRARIES})
+  message(STATUS "simageio_LIBRARY_DIRS=" ${simageio_LIBRARY_DIRS}) 
+  set(stracking_HAVE_SIMAGEIO 1)
+else( simageio_FOUND )
+  message(STATUS "NOT Using SImageIO")
+endif( simageio_FOUND )
 
 ## #################################################################
 ## SImageIO needed for tool
 ## #################################################################
 if (${stracking_BUILD_TOOLS})
-  find_package (simageio REQUIRED)
-  if ( simageio_FOUND )
-    message(STATUS "Using SImageIO")
-    set (SL_INCLUDE_DIRS ${SL_INCLUDE_DIRS} ${simageio_INCLUDE_DIRS})
-    set (SL_LIBRARY_DIRS ${SL_LIBRARY_DIRS} ${simageio_LIBRARY_DIRS})
-    set (SL_LIBRARIES ${SL_LIBRARIES} ${simageio_LIBRARIES})
-    message(STATUS "simageio_LIBRARY_DIRS=" ${simageio_LIBRARY_DIRS}) 
-    set(stracking_HAVE_SIMAGEIO 1)
-  else( simageio_FOUND )
-    message(STATUS "NOT Using SImageIO")
-  endif( simageio_FOUND )
-
   find_package (sdata REQUIRED)
   if ( sdata_FOUND )
     message(STATUS "Using sdata")
