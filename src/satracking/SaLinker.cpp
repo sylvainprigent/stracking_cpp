@@ -1,5 +1,5 @@
-/// \file SaTracker.cpp
-/// \brief SaTracker class
+/// \file SaLinker.cpp
+/// \brief SaLinker class
 /// \author Sylvain Prigent
 /// \version 0.1
 /// \date 2021
@@ -12,51 +12,51 @@
 #include <simage>
 #include <simageio>
 
-#include "SaTracker.h"
+#include "SaLinker.h"
 
-SaTracker::SaTracker()
+SaLinker::SaLinker()
 {
 
 }
 
-SaTracker::SaTracker(SaCost* costFunction, std::vector<std::string>& framesFiles, std::vector< std::vector<SaDetection*> >& detections)
+SaLinker::SaLinker(SaCost* costFunction, std::vector<std::string>& framesFiles, std::vector< std::vector<SaDetection*> >& detections)
 {
     m_costFunction = costFunction;
     m_framesFiles = framesFiles;
     m_detections = detections;
 }
 
-SaTracker::~SaTracker()
+SaLinker::~SaLinker()
 {
 
 }
 
-void SaTracker::setCost(SaCost* costFunction)
+void SaLinker::setCost(SaCost* costFunction)
 {
     m_costFunction = costFunction;
 }
 
-void SaTracker::setFramesFiles(std::vector<std::string>& framesFiles)
+void SaLinker::setFramesFiles(std::vector<std::string>& framesFiles)
 {
     m_framesFiles = framesFiles;
 }
 
-void SaTracker::setDetections(std::vector< std::vector<SaDetection*> >& detections)
+void SaLinker::setDetections(std::vector< std::vector<SaDetection*> >& detections)
 {
     m_detections = detections;
 }
 
-void SaTracker::setMaxMove(float maxMove)
+void SaLinker::setMaxMove(float maxMove)
 {
     m_maxMove = maxMove;
 }
 
-std::vector<SaTrack* > SaTracker::getTracks()
+std::vector<SaTrack* > SaLinker::getTracks()
 {
     return m_tracks;
 }
 
-void SaTracker::saveTracksToTxt(std::string fileName)
+void SaLinker::saveTracksToTxt(std::string fileName)
 {
     std::ofstream file(fileName.c_str(), std::ios::out | std::ios::trunc);
     if(file)
@@ -77,7 +77,7 @@ void SaTracker::saveTracksToTxt(std::string fileName)
     }
 }
 
-void SaTracker::saveTracksMoviePlot(std::string rootFileName)
+void SaLinker::saveTracksMoviePlot(std::string rootFileName)
 {
 
     int print_offset = 10;
@@ -131,7 +131,7 @@ void SaTracker::saveTracksMoviePlot(std::string rootFileName)
     }
 }
 
-bool SaTracker::isLessMaxMove(SaDetection* detection1, SaDetection* detection2)
+bool SaLinker::isLessMaxMove(SaDetection* detection1, SaDetection* detection2)
 {
     if ( fabs(detection1->x() - detection1->x()) <= m_maxMove){
         return true;

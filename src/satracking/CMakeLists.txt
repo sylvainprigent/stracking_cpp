@@ -18,21 +18,23 @@ project(satracking)
 SET(SRC_FILES
   SaCost.cpp
   SaCostEuclidean.cpp
+  SaCostStraight.cpp
   SaDetection.cpp
   SaDetectionReader.cpp
   SaTrack.cpp
-  SaTracker.cpp
-  SaTrackerLessCost.cpp
+  SaLinker.cpp
+  SaLinkerNaive.cpp
 )
 
 SET(HEADERS_FILES
   SaCost.h
   SaCostEuclidean.h
+  SaCostStraight.h
   SaDetection.h
   SaDetectionReader.h
   SaTrack.h
-  SaTracker.h
-  SaTrackerLessCost.h
+  SaLinker.h
+  SaLinkerNaive.h
 )
   
 ## #################################################################

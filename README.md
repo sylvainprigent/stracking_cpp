@@ -44,3 +44,10 @@ version: "3"
             volumes:
                 - './data:/app/data/' 
 ```
+
+
+# test command
+
+```
+./bin/AssociationTracker -i ./bin/frames.txt -d ./bin/detections.txt -t ./bin/out.txt -v ./bin/outdir/ -p ./bin/param.json
+```

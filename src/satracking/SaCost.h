@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "SaDetection.h"
+#include "SaTrack.h"
 
 #include "satrackingExport.h"
 
@@ -40,12 +41,9 @@ public:
     /// \brief Calculate the cost of connecting two detections
     /// \param[in] detection1 First detection
     /// \param[in] detection2 Second detection
-    virtual float calculateCost(SaDetection* detection1, SaDetection* detection2) = 0;
-
-    /// \fn virtual bool isProbability() = 0;
-    /// \brief Method used to specify the optimizer if the cost is a probability (in [0 1])
-    /// or otherwise any positive number
-    virtual bool isProbability() = 0;
+    /// \param[in] track1 Track which whom the detection1 belongs to. Used only for linkers that can link tracks
+    /// \param[in] track2 Track which whom the detection2 belongs to. Used only for linkers that can link tracks
+    virtual float calculateCost(SaDetection* detection1, SaDetection* detection2, SaTrack* track1 = nullptr, SaTrack* tracl2 = nullptr) = 0;
 
 public:
 

@@ -21,15 +21,33 @@ SaCost* SaFactories::cost(std::string name)
         SaCostEuclidean* cost = new SaCostEuclidean;
         return cost;
     }
+    if (name == "SaCostStraight"){
+        SaCostStraight* cost = new SaCostStraight;
+        SFloat* lambda = dynamic_cast<SFloat*>(m_parameters->get("SaCostStraight.Lambda"));
+        if (lambda){
+            cost->setLambda(lambda->get());
+        }
+        else{
+            throw SException("Connot read the parameter SaCostStraight.Lambda as float");
+        }
+        return cost;
+    }
 
     throw SException(("Cannot find the cost " + name).c_str());
 }
 
-SaTracker* SaFactories::tracker(std::string name)
+SaLinker* SaFactories::linker(std::string name)
 {
-    if (name == "SaTrackerLessCost"){
-        SaTrackerLessCost* tracker = new SaTrackerLessCost;
-        return tracker;
+    if (name == "SaLinkerNaive"){
+        SaLinkerNaive* linker = new SaLinkerNaive;
+        SFloat* maxMove = dynamic_cast<SFloat*>(m_parameters->get("SaLinker.MaxMove"));
+        if (maxMove){
+            linker->setMaxMove(maxMove->get());
+        }
+        else{
+            throw SException("Connot read the parameter SaLinker.MaxMove as float");
+        }
+        return linker;
     }
 
     throw SException(("Cannot find the tracker " + name).c_str());

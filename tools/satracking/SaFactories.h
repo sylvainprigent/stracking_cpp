@@ -17,7 +17,7 @@ public:
 
 public:
     SaCost* cost(std::string name);
-    SaTracker* tracker(std::string name);
+    SaLinker* linker(std::string name);
 
 private:
     SObject* m_parameters;

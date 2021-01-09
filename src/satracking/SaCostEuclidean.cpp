@@ -21,15 +21,10 @@ void SaCostEuclidean::loadDataCurentFrames(int, int)
     // no data needed
 }
 
-float SaCostEuclidean::calculateCost(SaDetection* detection1, SaDetection* detection2)
+float SaCostEuclidean::calculateCost(SaDetection* detection1, SaDetection* detection2, SaTrack*, SaTrack*)
 {
     float euclX = detection1->x() - detection2->x();
     float euclY = detection1->y() - detection2->y();
     float euclZ = detection1->z() - detection2->z();
     return euclX*euclX + euclY*euclY + euclZ*euclZ;
-}
-
-bool SaCostEuclidean::isProbability()
-{
-    return false;
 }

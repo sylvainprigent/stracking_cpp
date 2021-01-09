@@ -1,5 +1,5 @@
-/// \file SaTracker.h
-/// \brief SaTracker class
+/// \file SaLinker.h
+/// \brief SaLinker class
 /// \author Sylvain Prigent
 /// \version 0.1
 /// \date 2021
@@ -15,25 +15,25 @@
 
 #include "satrackingExport.h"
 
-/// \class SaTracker
+/// \class SaLinker
 /// \brief Interface for tracking algorithm. All tracking algorithm must implement this interface
-class SATRACKING_EXPORT SaTracker{
+class SATRACKING_EXPORT SaLinker{
 
 public:
 
-    /// \fn SaTracker();
+    /// \fn SaLinker();
     /// \brief Constructor
-    SaTracker();
-    /// \fn SaTracker(SATCost* costFunction, std::vector<std::string> framesFiles, std::vector< std::vector<SDetection*> > detections);
+    SaLinker();
+    /// \fn SaLinker(SATCost* costFunction, std::vector<std::string> framesFiles, std::vector< std::vector<SDetection*> > detections);
     /// \brief Constructor
     /// \param[in] costFunction  Pointer to the object that calculate the cost of connecting detections
     /// \param[in] framesFiles List of the files containing the frames
     /// \param[in] detections List of detected objects in each frame object [frame][idx of detection][detection info]
-    SaTracker(SaCost* costFunction, std::vector<std::string>& framesFiles, std::vector< std::vector<SaDetection*> >& detections);
+    SaLinker(SaCost* costFunction, std::vector<std::string>& framesFiles, std::vector< std::vector<SaDetection*> >& detections);
 
-    /// \fn virtual ~SaTracker();
+    /// \fn virtual ~SaLinker();
     /// \brief Destructor
-    virtual ~SaTracker();
+    virtual ~SaLinker();
 
 public:
     // ------------------------- Setters ---------------------------

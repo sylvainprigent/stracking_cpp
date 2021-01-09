@@ -1,5 +1,5 @@
-/// \file SaCostEuclidean.h
-/// \brief SaCostEuclidean class
+/// \file SaCostStraight.h
+/// \brief SaCostStraight class
 /// \author Sylvain Prigent
 /// \version 0.1
 /// \date 2021
@@ -10,22 +10,24 @@
 #include <vector>
 
 #include "SaCost.h"
-#include "SaDetection.h"
 
 #include "satrackingExport.h"
 
-/// \class SaCostEuclidean
-/// \brief Calculate a connection cost as the euclidean distance between the detections
-class SATRACKING_EXPORT SaCostEuclidean : public SaCost{
+/// \class SaCostStraight
+/// \brief Calculate a connection cost as the sum of the euclidean distance between the detections and
+/// the angle of the detections in the trajectory. It needs a linker that consider more than two detections
+/// to calculate the angle
+
+class SATRACKING_EXPORT SaCostStraight : public SaCost{
 
 public:
     /// \fn SaCost();
     /// \brief Constructor
-    SaCostEuclidean();
+    SaCostStraight();
 
     /// \fn ~SaCost();
     /// \brief Destructor
-    virtual ~SaCostEuclidean();
+    virtual ~SaCostStraight();
 
 public:
 
@@ -44,4 +46,9 @@ public:
     /// \param[in] track2 Track which whom the detection2 belongs to. Not used for euclidean distance
     virtual float calculateCost(SaDetection* detection1, SaDetection* detection2, SaTrack* track1 = nullptr, SaTrack* tracl2 = nullptr);
 
+public:
+    void setLambda(const float& lambda);
+
+private:
+    float m_lambda;
 };

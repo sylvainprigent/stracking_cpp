@@ -83,30 +83,30 @@ int main(int argc, char *argv[])
         SObject* parameters = dynamic_cast<SObject*>(jsonReader.get());
 
         std::cout << "SaCost=" << dynamic_cast<SString*>(parameters->get("SaCost"))->get() << std::endl;
-        std::cout << "SaTracker=" << dynamic_cast<SString*>(parameters->get("SaTracker"))->get() << std::endl;
+        std::cout << "SaLinker=" << dynamic_cast<SString*>(parameters->get("SaLinker"))->get() << std::endl;
 
-        // get the cost function and tracker
+        // get the cost function and linker
         SaFactories factory(parameters);
         SaCost* cost = factory.cost(dynamic_cast<SString*>(parameters->get("SaCost"))->get());
-        SaTracker* tracker = factory.tracker(dynamic_cast<SString*>(parameters->get("SaTracker"))->get());
+        SaLinker* linker = factory.linker(dynamic_cast<SString*>(parameters->get("SaLinker"))->get());
 
-        // initialize the tracker
-        tracker->setCost(cost);
-        tracker->setFramesFiles(framesFiles);
-        tracker->setDetections(detections);
+        // initialize the linker
+        linker->setCost(cost);
+        linker->setFramesFiles(framesFiles);
+        linker->setDetections(detections);
 
         // run the tracking
-        tracker->run();
+        linker->run();
 
         // save the outputs
         if (outputTrackTxtFile != ""){
-            tracker->saveTracksToTxt(outputTrackTxtFile);
+            linker->saveTracksToTxt(outputTrackTxtFile);
         }
         if (outputRepresentationRootFile != ""){
-            tracker->saveTracksMoviePlot(outputRepresentationRootFile);
+            linker->saveTracksMoviePlot(outputRepresentationRootFile);
         }
 
-        delete tracker;
+        delete linker;
         delete cost;
         delete parameters;
     }

@@ -1,4 +1,4 @@
-/// \file SaTrackerLessCost.h
+/// \file SaLinkerNaive.h
 /// \brief SaTracker class
 /// \author Sylvain Prigent
 /// \version 0.1
@@ -6,25 +6,25 @@
 
 #include <iostream>
 
-#include "SaTrackerLessCost.h"
+#include "SaLinkerNaive.h"
 
-SaTrackerLessCost::SaTrackerLessCost() : SaTracker()
+SaLinkerNaive::SaLinkerNaive() : SaLinker()
 {
 
 }
 
-SaTrackerLessCost::SaTrackerLessCost(SaCost* costFunction, std::vector<std::string>& framesFiles, std::vector< std::vector<SaDetection*> >& detections)
-: SaTracker(costFunction, framesFiles, detections)
+SaLinkerNaive::SaLinkerNaive(SaCost* costFunction, std::vector<std::string>& framesFiles, std::vector< std::vector<SaDetection*> >& detections)
+: SaLinker(costFunction, framesFiles, detections)
 {
 
 }
 
-SaTrackerLessCost::~SaTrackerLessCost()
+SaLinkerNaive::~SaLinkerNaive()
 {
 
 }
 
-void SaTrackerLessCost::run()
+void SaLinkerNaive::run()
 {
     m_tracks.clear();
 
@@ -47,7 +47,7 @@ void SaTrackerLessCost::run()
                 int min_pos = -1;
                 for (int i = 0 ; i < targets.size() ; i++){
                     if (this->isLessMaxMove(last_detection, targets[i])){
-                        float cost_i = m_costFunction->calculateCost(last_detection, targets[i]);
+                        float cost_i = m_costFunction->calculateCost(last_detection, targets[i], m_tracks[l]);
                         if (cost_i < min_cost){
                             min_cost = cost_i;
                             min_pos = i;
