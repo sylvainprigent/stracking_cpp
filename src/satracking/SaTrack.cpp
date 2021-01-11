@@ -34,3 +34,13 @@ SaDetection* SaTrack::first()
 {
     return m_detections[0];
 }
+
+std::vector<SaDetection*> SaTrack::detections()
+{
+    return m_detections;
+}
+
+void SaTrack::setDetections(std::vector<SaDetection*>& detections)
+{
+    m_detections = detections;
+}

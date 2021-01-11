@@ -42,6 +42,9 @@ public:
     /// \return the first detection of the track
     SaDetection* first();
 
+    std::vector<SaDetection*> detections();
+    void setDetections(std::vector<SaDetection*>& detections);
+
 protected:
     std::vector<SaDetection*> m_detections;
 };

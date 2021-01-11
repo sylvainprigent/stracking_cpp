@@ -10,13 +10,13 @@
 
 SaLinkerNaive::SaLinkerNaive() : SaLinker()
 {
-
+    m_maxMove = 100;
 }
 
 SaLinkerNaive::SaLinkerNaive(SaCost* costFunction, std::vector<std::string>& framesFiles, std::vector< std::vector<SaDetection*> >& detections)
 : SaLinker(costFunction, framesFiles, detections)
 {
-
+    m_maxMove = 100;
 }
 
 SaLinkerNaive::~SaLinkerNaive()

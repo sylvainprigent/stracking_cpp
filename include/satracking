@@ -5,4 +5,5 @@
 #include "../src/satracking/SaDetectionReader.h"
 #include "../src/satracking/SaTrack.h"
 #include "../src/satracking/SaLinker.h"
+#include "../src/satracking/SaLinkerGraph.h"
 #include "../src/satracking/SaLinkerNaive.h"

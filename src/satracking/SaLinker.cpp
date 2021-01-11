@@ -24,6 +24,7 @@ SaLinker::SaLinker(SaCost* costFunction, std::vector<std::string>& framesFiles, 
     m_costFunction = costFunction;
     m_framesFiles = framesFiles;
     m_detections = detections;
+    m_costFunction->setFramesPath(m_framesFiles);
 }
 
 SaLinker::~SaLinker()
