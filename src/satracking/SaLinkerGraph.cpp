@@ -39,9 +39,9 @@ SaLinkerGraph::~SaLinkerGraph()
 
 void SaLinkerGraph::run()
 {
-    std::cout << "SaLinkerGraph::run() starts" << std::endl;
+    //std::cout << "SaLinkerGraph::run() starts" << std::endl;
     this->runShortestPath();
-    std::cout << "SaLinkerGraph::run() ends" << std::endl;
+    //std::cout << "SaLinkerGraph::run() ends" << std::endl;
 }   
 
 void SaLinkerGraph::setJump(unsigned int jump)
@@ -66,14 +66,12 @@ void SaLinkerGraph::setMaxCost(const float& maxCost)
 
 void SaLinkerGraph::runShortestPath()
 {
-    cout << endl << "updateShortestPath -> Begining" << endl;
-
-    cout << " \t updateShortestPath -> create the graph" << endl;
+    //cout << endl << "updateShortestPath -> Begining" << endl;
     // build the graph
      // 1- Create the object list
     vector<SaDetection*> m_nodesData;
     vector<int> frameBreak;
-    int countor = -1;
+    int countor = 0;
     for (unsigned int frame = 0 ; frame < m_detections.size() ; ++frame){
         for (unsigned int objIdx = 0 ; objIdx < m_detections[frame].size() ; ++ objIdx){
             countor++;
@@ -163,35 +161,44 @@ void SaLinkerGraph::runShortestPath()
 
     bool stop = false;
     int iter = -1;
+    int sp_out;
     while (!stop){
         iter++;
         if (iter%10 == 0){
             cout << "shortest path: Compute track " << iter << endl;
         }
         // shortest path
-        shortestPath.run(0);
-        std::vector<unsigned int> predecessors = shortestPath.predecessors();
+        sp_out = shortestPath.run(0);
 
-        /// \todo add here a condition to stop: if track does not exits ?
-        SaTrack *new_track = new SaTrack();
-        std::vector<SaDetection*> new_track_d;;
-        unsigned int predecessor = predecessors[target];
-        while (predecessor > 0){
-            new_track_d.push_back(m_nodesData[predecessor-2]);
-            predecessor = predecessors[predecessor];
-            graph->removeNode(predecessor);
+        if (sp_out == 0){
+            std::map<unsigned int, unsigned int> predecessors = shortestPath.predecessors();
+
+            /// \todo add here a condition to stop: if track does not exits ?
+            SaTrack *new_track = new SaTrack();
+            std::vector<SaDetection*> new_track_d;;
+            unsigned int predecessor = predecessors[target];
+            while (predecessor > 0){
+                new_track_d.push_back(m_nodesData[predecessor-2]);
+                graph->removeNode(predecessor);
+                predecessor = predecessors[predecessor];
+            }
+            std::reverse(new_track_d.begin(), new_track_d.end());
+            new_track->setDetections(new_track_d);
+
+            //std::cout << "found a track of length: " << new_track->size() << std::endl;
+
+            if (new_track->size() <= 2){
+                stop = true;
+                delete new_track;
+                break;
+            }
+            if (!stop){
+                // create the new track
+                m_tracks.push_back(new_track);
+            }
         }
-        std::reverse(new_track_d.begin(), new_track_d.end());
-        new_track->setDetections(new_track_d);
-
-        if (new_track->size() <= 2){
+        else{
             stop = true;
-            delete new_track;
-            break;
-        }
-        if (!stop){
-            // create the new track
-            m_tracks.push_back(new_track);
         }
     }
     delete graph;

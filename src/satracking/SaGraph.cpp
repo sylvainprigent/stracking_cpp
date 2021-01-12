@@ -7,6 +7,8 @@
 #include "SaGraph.h"
 
 #include "math.h"
+#include <algorithm>
+#include <iostream>
 
 SaArc::SaArc()
 {
@@ -54,13 +56,19 @@ int SaArc::weight()
 SaGraph::SaGraph()
 {
     m_graph.clear();
-    m_nodesNumber = 0;
+    m_nodes.clear();
 }
 
 SaGraph::SaGraph(std::vector<SaArc*>& graph, unsigned int nodesNumber)
 {
     m_graph = graph;
-    m_nodesNumber = nodesNumber;
+    this->setNodesNumber(nodesNumber);
+}
+
+SaGraph::SaGraph(std::vector<SaArc*>& graph, std::vector<unsigned int>& nodes)
+{
+    m_graph = graph;
+    m_nodes = nodes;
 }
 
 SaGraph::~SaGraph()
@@ -75,7 +83,11 @@ void SaGraph::setArcs(std::vector<SaArc*>& graph)
 
 void SaGraph::setNodesNumber(unsigned int nodesNumber)
 {
-    m_nodesNumber = nodesNumber;
+    m_nodes.clear();
+    m_nodes.resize(nodesNumber);
+    for (int n = 0 ; n < nodesNumber ; ++n){
+        m_nodes[n] = n;
+    }
 }
 
 void SaGraph::addArc(SaArc* arc)
@@ -85,8 +97,9 @@ void SaGraph::addArc(SaArc* arc)
 
 unsigned int SaGraph::addNode()
 {
-    m_nodesNumber++;
-    return m_nodesNumber-1;
+    unsigned int id =  m_nodes.size();
+    m_nodes.push_back(id);
+    return id;
 }
 
 void SaGraph::removeNode(unsigned int node)
@@ -99,7 +112,19 @@ void SaGraph::removeNode(unsigned int node)
             m_graph.erase(m_graph.begin()+i);
         }
     }
-    m_nodesNumber--;
+    unsigned int nodeIdx = -1;
+    for (int i = 0 ; i < m_nodes.size(); i++)
+    {
+        if (m_nodes[i] == node){
+            nodeIdx = i;
+            break;
+        }
+        
+    }
+    if (nodeIdx >= 0){
+        m_nodes.erase(m_nodes.begin()+nodeIdx);
+    }
+    
 }
 
 std::vector<SaArc*> SaGraph::graph()
@@ -107,9 +132,14 @@ std::vector<SaArc*> SaGraph::graph()
     return m_graph;
 }
 
+std::vector<unsigned int> SaGraph::nodes()
+{
+    return m_nodes;
+}
+
 unsigned int SaGraph::nodesNumber()
 {
-    return m_nodesNumber;
+    return m_nodes.size();
 }
 
 // ///////////////////////////////////////////////////////
@@ -125,29 +155,53 @@ SaBellmanFord::~SaBellmanFord()
 
 }
 
-void SaBellmanFord::run(unsigned int v)
+int SaBellmanFord::run(unsigned int v)
 {
     std::vector<SaArc*> e = m_graph->graph();
-    unsigned int nodesNumber = m_graph->nodesNumber();
+    std::vector<unsigned int> nodes = m_graph->nodes();
 
+    //std::cout << "graph node number = " << nodes.size() << std::endl;
+    //std::cout << "graph arcs number = " << e.size() << std::endl;
+    //std::cout << "graph print:" << std::endl;
+    //for (int i = 0 ; i < e.size() ; i++)
+    //{
+    //    std::cout << "arc: " << e[i]->source() << ", " << e[i]->target() << ", " << e[i]->weight() << ", " << std::endl;
+    //}
+    //for (int i = 0 ; i < nodes.size() ; i++){
+    //    std::cout << "node[" << i << "]="<< nodes[i]<<std::endl; 
+    //}
+
+    if (e.size() < 2){
+        return 1;
+    }
+
+    int INF = 999999999;
     // initialization
     m_distances.clear();
     m_predecessors.clear();
-    m_distances.resize(nodesNumber);
-    m_predecessors.resize(nodesNumber);
-    for (int n = 0 ; n < nodesNumber ; n++)
+    for (int n = 0 ; n < nodes.size() ; n++)
     {
-        m_distances[n] = INT64_MAX;
-        m_predecessors[n] = -1;
+        m_distances[nodes[n]] = INF;
+        m_predecessors[nodes[n]] = -1;
     }
 
-    m_distances[v] = 0;
+    m_distances[nodes[v]] = 0;
+
+    /*
+    std::map<unsigned int, int>::iterator it = m_distances.begin();
+    std::cout << "initial distances:" << std::endl;
+    while (it != m_distances.end())
+    {
+        std::cout << "d[" << it->first << "]: " << it->second << std::endl;
+        it++;
+    }
+    */
 
     for (;;)
     {
         bool any = false;
         for (int j = 0; j < e.size(); ++j)
-            if (m_distances[e[j]->source()] < INT64_MAX)
+            if (m_distances[e[j]->source()] < INF)
                 if (m_distances[e[j]->target()] > m_distances[e[j]->source()] + e[j]->weight())
                 {
                     m_distances[e[j]->target()] = m_distances[e[j]->source()] + e[j]->weight();
@@ -156,14 +210,30 @@ void SaBellmanFord::run(unsigned int v)
                 }
         if (!any)  break;
     }
+
+    return 0;
 }
 
-std::vector<unsigned int> SaBellmanFord::predecessors()
+std::vector<unsigned int> SaBellmanFord::path(unsigned int node)
+{
+    std::vector<unsigned int> path;
+    path.push_back(node);
+    unsigned int predecessor = node;    
+    while (predecessor > 0)
+    {
+        predecessor = m_predecessors[predecessor];
+        path.push_back(predecessor);
+    }
+    std::reverse(path.begin(), path.end());
+    return path;
+}
+
+std::map<unsigned int, unsigned int> SaBellmanFord::predecessors()
 {
     return m_predecessors;
 } 
 
-std::vector<int> SaBellmanFord::distances()
+std::map<unsigned int, int> SaBellmanFord::distances()
 {
     return m_distances;
 }

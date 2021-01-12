@@ -21,6 +21,7 @@ SET(SRC_FILES
   SaCostStraight.cpp
   SaDetection.cpp
   SaDetectionReader.cpp
+  SaGraph.cpp
   SaTrack.cpp
   SaLinker.cpp
   SaLinkerGraph.cpp
@@ -33,6 +34,7 @@ SET(HEADERS_FILES
   SaCostStraight.h
   SaDetection.h
   SaDetectionReader.h
+  SaGraph.h
   SaTrack.h
   SaLinker.h
   SaLinkerGraph.h

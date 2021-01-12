@@ -10,4 +10,4 @@
 
 enable_testing()
 
-#add_subdirectory(satracking)
+add_subdirectory(satracking)

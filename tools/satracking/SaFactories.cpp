@@ -38,15 +38,20 @@ SaCost* SaFactories::cost(std::string name)
 
 SaLinker* SaFactories::linker(std::string name)
 {
+    // read the maxmove parameter
+    SFloat* maxMove = dynamic_cast<SFloat*>(m_parameters->get("SaLinker.MaxMove"));
+    if (!maxMove){
+        throw SException("Connot read the parameter SaLinker.MaxMove as float");
+    }
+
     if (name == "SaLinkerNaive"){
         SaLinkerNaive* linker = new SaLinkerNaive;
-        SFloat* maxMove = dynamic_cast<SFloat*>(m_parameters->get("SaLinker.MaxMove"));
-        if (maxMove){
-            linker->setMaxMove(maxMove->get());
-        }
-        else{
-            throw SException("Connot read the parameter SaLinker.MaxMove as float");
-        }
+        linker->setMaxMove(maxMove->get());
+        return linker;
+    }
+    if (name == "SaLinkerGraph"){
+        SaLinkerGraph* linker = new SaLinkerGraph;
+        linker->setMaxMove(maxMove->get());
         return linker;
     }
 

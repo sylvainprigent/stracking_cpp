@@ -61,6 +61,7 @@ if(stracking_BUILD_TOOLS)
   add_subdirectory( tools )
 endif(stracking_BUILD_TOOLS)
 if(stracking_BUILD_TESTS)
+  enable_testing()
   add_subdirectory( tests )
 endif(stracking_BUILD_TESTS)
 

@@ -8,6 +8,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 
 #include "satrackingExport.h"
@@ -56,8 +57,13 @@ public:
     /// \brief Constructor
     /// \param[in] graph Vector containing the graph arcs
     /// \param[in] nodesNumber Number of nodes in the graph
-    /// \param[in] detections List of detected objects in each frame object [frame][idx of detection][detection info]
     SaGraph(std::vector<SaArc*>& graph, unsigned int nodesNumber);
+
+    /// \fn SaGraph(std::vector<SaArc*>& graph, unsigned int nodesNumber);
+    /// \brief Constructor
+    /// \param[in] graph Vector containing the graph arcs
+    /// \param[in] nodes List of nodes ids
+    SaGraph(std::vector<SaArc*>& graph, std::vector<unsigned int>& nodes);
 
     /// \fn ~SaGraph();
     /// \brief Destructor
@@ -72,12 +78,13 @@ public:
 public:
     void removeNode(unsigned int node);
     std::vector<SaArc*> graph();
+    std::vector<unsigned int> nodes();
     unsigned int nodesNumber();
 
 protected:
     // data
     std::vector<SaArc*> m_graph;
-    unsigned int m_nodesNumber;
+    std::vector<unsigned int > m_nodes;
 
 };
 
@@ -91,15 +98,16 @@ public:
 
 public:
     /// \param[in] v Index of the vertex or node reference
-    void run(unsigned int v);
+    int run(unsigned int v);
 
 public:
-    std::vector<unsigned int> predecessors();  
-    std::vector<int> distances();
+    std::map<unsigned int, unsigned int> predecessors();  
+    std::map<unsigned int, int> distances();
+    std::vector<unsigned int> path(unsigned int node);
 
 protected:
-    std::vector<int> m_distances;
-    std::vector<unsigned int> m_predecessors;  
+    std::map<unsigned int, int> m_distances;
+    std::map<unsigned int, unsigned int> m_predecessors;  
 
 private:     
     SaGraph* m_graph;
