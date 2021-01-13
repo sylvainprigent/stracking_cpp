@@ -1,6 +1,6 @@
-/Users/sprigent/Documents/code/slib/stracking/tests/data/tracks2/track2_t001.txt
-/Users/sprigent/Documents/code/slib/stracking/tests/data/tracks2/track2_t002.txt
-/Users/sprigent/Documents/code/slib/stracking/tests/data/tracks2/track2_t003.txt
-/Users/sprigent/Documents/code/slib/stracking/tests/data/tracks2/track2_t004.txt
-/Users/sprigent/Documents/code/slib/stracking/tests/data/tracks2/track2_t005.txt
-/Users/sprigent/Documents/code/slib/stracking/tests/data/tracks2/track2_t006.txt
+track2_t001.txt
+track2_t002.txt
+track2_t003.txt
+track2_t004.txt
+track2_t005.txt
+track2_t006.txt

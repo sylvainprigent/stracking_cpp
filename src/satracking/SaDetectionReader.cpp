@@ -67,6 +67,10 @@ std::vector<SaDetection*> SaDetectionReader::readDetections(std::string filePath
         }
         detectionsFile.close(); 
     }
+    else
+    {
+        throw SException(std::string("The file "+filePath+" does not exists").c_str());
+    }
     return out;
 }
 
@@ -78,11 +82,21 @@ std::vector< std::vector<SaDetection*> > SaDetectionReader::readDetectionsList(s
     int t = -1;
     if (lFile.is_open()){
         std::string tp;
-        while(getline(lFile, tp)){ 
+        while(getline(lFile, tp))
+        { 
             t++;
-            out.push_back(SaDetectionReader::readDetections(tp, t));
+            std::string currentDetectionFile = SPath::relativeToFilename(tp, listFile);
+            if (currentDetectionFile == "")
+            {
+                throw SException(std::string("The file "+tp+" does not exists").c_str());
+            }
+            out.push_back(SaDetectionReader::readDetections(currentDetectionFile, t));
         }
         lFile.close(); 
+    }
+    else
+    {
+        throw SException(std::string("The detection file "+listFile+" does not exists").c_str());
     }
     return out;
 }

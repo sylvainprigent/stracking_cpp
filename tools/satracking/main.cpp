@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 
 #include <score>
 #include <scli>
@@ -47,15 +46,7 @@ int main(int argc, char *argv[])
         // load the frames list
         std::vector< std::string > framesFiles;
         if (inputFramesFiles != ""){
-            std::fstream framesFile;
-            framesFile.open(inputFramesFiles, std::ios::in);
-            if (framesFile.is_open()){
-                std::string tp;
-                while(getline(framesFile, tp)){ 
-                    framesFiles.push_back(tp);
-                }
-                framesFile.close(); 
-            }
+            framesFiles = SaFramesReader::readFramesList(inputFramesFiles);
         }
 
         std::cout << "Frames:" << std::endl;

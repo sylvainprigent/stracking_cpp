@@ -3,6 +3,7 @@
 #include "../src/satracking/SaCostStraight.h"
 #include "../src/satracking/SaDetection.h"
 #include "../src/satracking/SaDetectionReader.h"
+#include "../src/satracking/SaFramesReader.h"
 #include "../src/satracking/SaTrack.h"
 #include "../src/satracking/SaLinker.h"
 #include "../src/satracking/SaLinkerGraph.h"

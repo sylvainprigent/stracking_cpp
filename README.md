@@ -51,5 +51,5 @@ version: "3"
 ```
 ./bin/AssociationTracker -i ./bin/frames.txt -d ./bin/detections.txt -t ./bin/out.txt -v ./bin/outdir/ -p ./bin/param.json
 
-./bin/AssociationTracker -i ./bin/frames.txt -d ./bin/detections.txt -t ./bin/out_graph.txt -v ./bin/outdir_graph/ -p ./bin/param_graph.json
+./bin/AssociationTracker -i ../tests/data/tracks1/frames.txt -d ../tests/data/tracks1/detections.txt -t ./bin/out_graph.txt -v ./bin/outdir_graph/ -p ./bin/param_graph.json
 ```

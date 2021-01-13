@@ -20,23 +20,25 @@ enable_testing()
 set(${PROJECT_NAME}_MAIN_SOURCES
   BellmanFord1Test.cpp
   BellmanFord2Test.cpp
+  LinkerGraphTest.cpp
+  LinkerNaiveTest.cpp
 )
 
 ## ###################################################################
 ## Configure file
 ## ###################################################################
 
-#if(EXISTS ${PROJECT_SOURCE_DIR}/imagesTest/cell.tif)
-#  set(CELL ${PROJECT_SOURCE_DIR}/imagesTest/cell.tif)
-#endif()
+if(EXISTS ${PROJECT_SOURCE_DIR}/../data/tracks1/frames.txt)
+  set(TRACKS1_FRAMES ${PROJECT_SOURCE_DIR}/../data/tracks1/frames.txt)
+endif()
 
-#if(EXISTS ${PROJECT_SOURCE_DIR}/imagesTest/cell_bm.tif)
-#  set(CELLBM ${PROJECT_SOURCE_DIR}/imagesTest/cell_bm.tif)
-#endif()
+if(EXISTS ${PROJECT_SOURCE_DIR}/../data/tracks1/detections.txt)
+  set(TRACKS1_DETECTIONS ${PROJECT_SOURCE_DIR}/../data/tracks1/detections.txt)
+endif()
 
-#if(EXISTS ${PROJECT_SOURCE_DIR}/smppTestConfig.h.in)
-#  configure_file(smppTestConfig.h.in ${CMAKE_BINARY_DIR}/smppTestConfig.h)
-#endif()
+if(EXISTS ${PROJECT_SOURCE_DIR}/SaTrackingTestConfig.h.in)
+  configure_file(SaTrackingTestConfig.h.in ${CMAKE_BINARY_DIR}/SaTrackingTestConfig.h)
+endif()
 
 ## #################################################################
 ## Build rules
