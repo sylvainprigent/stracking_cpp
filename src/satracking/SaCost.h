@@ -15,7 +15,7 @@
 #include "satrackingExport.h"
 
 /// \class SaCost
-/// \brief Interface of a tracking cost function. The cost measures how two detections are likelly connected
+/// \brief Interface of a tracking cost function. The cost measures how likely two detections are connected
 class SATRACKING_EXPORT SaCost{
 
 public:
@@ -27,9 +27,7 @@ public:
     /// \brief Destructor
     virtual ~SaCost();
 
-
 public:
-
     // --------------------- Virtuals function -----------------
     /// \fn virtual void loadDataCurentFrames(int idxFrame1, int idxFrame2) = 0;
     /// \brief Function to load the data needed for the calculation of the cost between two frames
@@ -46,7 +44,6 @@ public:
     virtual float calculateCost(SaDetection* detection1, SaDetection* detection2, SaTrack* track1 = nullptr, SaTrack* tracl2 = nullptr) = 0;
 
 public:
-
     // -------------------- Setters -----------------------------
     /// \fn void SetFramesPath(std::vector<std::string> &framesFiles);
     /// \brief Function used to load the frames (called by the optimizer)

@@ -14,23 +14,22 @@
 #include "satrackingExport.h"
 
 /// \class SaCostStraight
-/// \brief Calculate a connection cost as the sum of the euclidean distance between the detections and
+/// Calculate a connection cost as the sum of the euclidean distance between the detections and
 /// the angle of the detections in the trajectory. It needs a linker that consider more than two detections
 /// to calculate the angle
 
 class SATRACKING_EXPORT SaCostStraight : public SaCost{
 
 public:
-    /// \fn SaCost();
+    /// \fn SaCostStraight();
     /// \brief Constructor
     SaCostStraight();
 
-    /// \fn ~SaCost();
+    /// \fn ~SaCostStraight();
     /// \brief Destructor
     virtual ~SaCostStraight();
 
 public:
-
     // --------------------- Virtuals function -----------------
     /// \fn virtual void loadDataCurentFrames(int idxFrame1, int idxFrame2) = 0;
     /// \brief Function to load the data needed for the calculation of the cost between two frames
@@ -47,8 +46,12 @@ public:
     virtual float calculateCost(SaDetection* detection1, SaDetection* detection2, SaTrack* track1 = nullptr, SaTrack* tracl2 = nullptr);
 
 public:
+    /// \fn void setLambda(const float& lambda);
+    /// \brief Setter for the lambda parameter
+    /// \param[in] lambda Weight to balance the effect of the angle w.r.t the euclidean distance 
     void setLambda(const float& lambda);
 
 private:
-    float m_lambda;
+    float m_lambda; ///< Weight to balance the effect of the angle w.r.t the euclidean distance 
+    
 };

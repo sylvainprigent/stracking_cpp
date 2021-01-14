@@ -52,9 +52,8 @@ include(strackingDependencies)
 ## #################################################################
 ## Define Internal Architecture (for includes)
 ## #################################################################
-option(stracking_BUILD_TOOLS "Build Tools" OFF)
-option(stracking_BUILD_TESTS "Build Tests" ON)
-
+option(stracking_BUILD_TOOLS "Build Tools" ON)
+option(stracking_BUILD_TESTS "Build Tests" OFF)
 
 add_subdirectory( src )
 if(stracking_BUILD_TOOLS)

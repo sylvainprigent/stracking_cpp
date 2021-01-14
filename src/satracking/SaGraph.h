@@ -29,8 +29,17 @@ public:
     SaArc(unsigned int source, unsigned int target, int weight);
 
 public:
+    /// \fn void setSource(unsigned int source);
+    /// \brief set the index of the source node (or vertex)
+    /// \param[in] source Index of the source node
     void setSource(unsigned int source);
+    /// \fn void setTarget(unsigned int target);
+    /// \brief set the index of the target node (or vertex)
+    /// \param[in] target Index of the target node
     void setTarget(unsigned int target);
+    /// \fn void setWeight(int weight);
+    /// \brief setter for the weight of the arc
+    /// \param[in] weight Weight or cost of the arc
     void setWeight(int weight);
 
     unsigned int source();

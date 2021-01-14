@@ -19,16 +19,15 @@
 class SATRACKING_EXPORT SaCostEuclidean : public SaCost{
 
 public:
-    /// \fn SaCost();
+    /// \fn SaCostEuclidean();
     /// \brief Constructor
     SaCostEuclidean();
 
-    /// \fn ~SaCost();
+    /// \fn ~SaCostEuclidean();
     /// \brief Destructor
     virtual ~SaCostEuclidean();
 
 public:
-
     // --------------------- Virtuals function -----------------
     /// \fn virtual void loadDataCurentFrames(int idxFrame1, int idxFrame2) = 0;
     /// \brief Function to load the data needed for the calculation of the cost between two frames

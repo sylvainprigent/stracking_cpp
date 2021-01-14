@@ -16,5 +16,9 @@
 class SATRACKING_EXPORT SaFramesReader{
     
 public:
+    /// \fn static std::vector<std::string> readFramesList(std::string filePath);
+    /// \brief read a movie txt file
+    /// \param[in] filePath String containing the txt movie file
+    /// \return list of string each containing the path of one frame image
     static std::vector<std::string> readFramesList(std::string filePath);
 };
