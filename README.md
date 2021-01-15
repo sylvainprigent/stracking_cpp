@@ -53,3 +53,9 @@ version: "3"
 
 ./bin/AssociationTracker -i ../tests/data/tracks1/frames.txt -d ../tests/data/tracks1/detections.txt -t ./bin/out_graph.txt -v ./bin/outdir_graph/ -p ./bin/param_graph.json
 ```
+
+# compile the Sphinx guide
+
+```
+
+```
