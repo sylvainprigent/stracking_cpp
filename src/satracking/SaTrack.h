@@ -18,6 +18,8 @@
 class SATRACKING_EXPORT SaTrack{
 
 public:
+    /// \fn SaTrack();
+    /// \brief Constructor
     SaTrack();
 
 public:
@@ -27,6 +29,7 @@ public:
     /// \param[in] detection Pointer to the detection to append
     void append(SaDetection* detection);
 
+public:
     // ---------------------- getters ------------------------
     /// \fn unsigned int size();
     /// \return the size (number of detections) in the track
@@ -38,13 +41,18 @@ public:
     /// \fn SaDetection* last();
     /// \return the last detection of the track
     SaDetection* last();
-        /// \fn SaDetection* first();
+    /// \fn SaDetection* first();
     /// \return the first detection of the track
     SaDetection* first();
-
+    /// \fn std::vector<SaDetection*> detections();
+    /// \brief Getter fot the detections in the track
+    /// \return Vector containing the pointer to the detections
     std::vector<SaDetection*> detections();
+    /// \fn void setDetections(std::vector<SaDetection*>& detections);
+    /// \brief setter for the detection list
+    /// \param[in] detections Vector containing the pointers to the detections
     void setDetections(std::vector<SaDetection*>& detections);
 
 protected:
-    std::vector<SaDetection*> m_detections;
+    std::vector<SaDetection*> m_detections; ///< list of the detections in the track
 };

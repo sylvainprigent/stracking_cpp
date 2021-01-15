@@ -69,13 +69,13 @@ void SaLinkerGraph::runShortestPath()
     //cout << endl << "updateShortestPath -> Begining" << endl;
     // build the graph
      // 1- Create the object list
-    vector<SaDetection*> m_nodesData;
+    vector<SaDetection*> nodesData;
     vector<int> frameBreak;
     int countor = 0;
     for (unsigned int frame = 0 ; frame < m_detections.size() ; ++frame){
         for (unsigned int objIdx = 0 ; objIdx < m_detections[frame].size() ; ++ objIdx){
             countor++;
-            m_nodesData.push_back(m_detections[frame][objIdx]);
+            nodesData.push_back(m_detections[frame][objIdx]);
         }
         frameBreak.push_back(countor+1);
     }
@@ -178,7 +178,7 @@ void SaLinkerGraph::runShortestPath()
             std::vector<SaDetection*> new_track_d;;
             unsigned int predecessor = predecessors[target];
             while (predecessor > 0){
-                new_track_d.push_back(m_nodesData[predecessor-2]);
+                new_track_d.push_back(nodesData[predecessor-2]);
                 graph->removeNode(predecessor);
                 predecessor = predecessors[predecessor];
             }

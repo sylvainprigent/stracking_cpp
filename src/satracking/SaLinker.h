@@ -94,5 +94,5 @@ protected:
 
 protected:
     // outputs
-    std::vector<SaTrack*> m_tracks;
+    std::vector<SaTrack*> m_tracks; ///< list of obtained tracks
 };

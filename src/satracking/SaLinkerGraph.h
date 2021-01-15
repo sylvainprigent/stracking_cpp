@@ -18,7 +18,6 @@
 class SATRACKING_EXPORT SaLinkerGraph: public SaLinker{
 
 public:
-
     /// \fn SaLinkerGraph();
     /// \brief Constructor
     SaLinkerGraph();
@@ -70,6 +69,4 @@ protected:
     float m_coefIntegerConversion; ///< setCoefIntegerConversion
     float m_maxCost; ///< maximum possible value of the cost for normalization
 
-private:
-    std::vector<SaDetection*> m_nodesData;
 };
